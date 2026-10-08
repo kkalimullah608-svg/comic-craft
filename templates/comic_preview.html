@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Comic Preview</title>
+	<link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+	<main class="container">
+		<header class="top">
+			<h1>Your Comic</h1>
+			<a class="button secondary" href="/">Create Another</a>
+		</header>
+
+		{% for panel in layout %}
+		<section class="panel card">
+			<h2>Panel {{ panel.panel_number }}: {{ panel.title }}</h2>
+			<img src="{{ panel.image_path }}" alt="{{ panel.title }}">
+			<p class="scene"><em>{{ panel.scene_description }}</em></p>
+
+			{% if panel.caption %}
+			<p><strong>Caption:</strong> {{ panel.caption }}</p>
+			{% endif %}
+
+			{% if panel.narration %}
+			<p><strong>Narration:</strong> {{ panel.narration }}</p>
+			{% endif %}
+
+			{% if panel.dialogue %}
+			<p><strong>Dialogue:</strong> {{ panel.dialogue }}</p>
+			{% endif %}
+		</section>
+		{% endfor %}
+
+		<div class="actions">
+			<a class="button" href="{{ pdf_path }}" target="_blank" download>
+				Download Your Comic as PDF
+			</a>
+		</div>
+	</main>
+</body>
+
+</html>
